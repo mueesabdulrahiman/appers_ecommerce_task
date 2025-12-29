@@ -49,6 +49,8 @@ The app focuses on UI quality, smooth UX, and clean architecture, while keeping 
 
 - Followed a clean, modern e-commerce UI inspired by common production apps.
 
+- Reviewed design references from platforms like Dribbble to understand current UI patterns and spacing standards.
+
 - Used light colors, clear typography, and card-based layouts to keep the interface readable and professional.
 
 - Avoided over-animation to maintain performance and clarity.
