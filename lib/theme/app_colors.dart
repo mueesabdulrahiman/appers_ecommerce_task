@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primary = Colors.black;
-  static const Color background = Colors.white;
-  static Color card = Colors.grey.shade200;
 
-  static const Color textPrimary = Colors.black;
-  static Color textSecondary = Colors.grey.shade600;
-  //Color(0xFF6B7280);
+  // product description color
+  static Color desColor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+      ? Colors.grey.shade500
+      : Colors.grey.shade700;
 
-  static const Color divider = Colors.black;
-  static const Color rating = Colors.amber;
+  // Button color
+  static Color buttonColor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+      ? Colors.grey.shade700
+      : Colors.black;
+
+  // navaBar
+  static Color navBarSelected(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+      ? Colors.white
+      : Colors.black;
+
+  static Color navBarUnSelected(BuildContext context) => Colors.grey.shade600;
 }

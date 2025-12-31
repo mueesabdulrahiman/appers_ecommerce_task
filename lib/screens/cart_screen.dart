@@ -12,9 +12,20 @@ class CartPage extends StatelessWidget {
     final cart = context.watch<CartProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Shopping Cart')),
+      appBar: AppBar(
+        title: Text(
+          'Shopping Cart',
+
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
       body: cart.items.isEmpty
-          ? const Center(child: Text('Your cart is empty'))
+          ? Center(
+              child: Text(
+                'Your cart is empty',
+                style: TextStyle(color: Theme.of(context).primaryColor),
+              ),
+            )
           : Column(
               children: [
                 Expanded(

@@ -1,4 +1,5 @@
 import 'package:appers_ecommerce_app/providers/cart_provider.dart';
+import 'package:appers_ecommerce_app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CartTotalSection extends StatelessWidget {
@@ -11,18 +12,20 @@ class CartTotalSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
+
         boxShadow: [
           BoxShadow(blurRadius: 12, color: Colors.black.withOpacity(0.06)),
         ],
       ),
       child: Column(
         children: [
-          _row('Subtotal', '\$${cart.totalAmount.toStringAsFixed(2)}'),
+          _row(context, 'Subtotal', '\$${cart.totalAmount.toStringAsFixed(2)}'),
           const SizedBox(height: 6),
-          _row('Shipping', 'Free'),
+          _row(context, 'Shipping', 'Free'),
           const Divider(height: 24),
           _row(
+            context,
             'Total',
             '\$${cart.totalAmount.toStringAsFixed(2)}',
             isBold: true,
@@ -32,12 +35,10 @@ class CartTotalSection extends StatelessWidget {
             height: 52,
             width: double.infinity,
             child: ElevatedButton(
-              
-              onPressed: () {
-               
-              },
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
+                backgroundColor: AppColors.buttonColor(context),
+
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
@@ -53,13 +54,20 @@ class CartTotalSection extends StatelessWidget {
     );
   }
 
-  Widget _row(String label, String value, {bool isBold = false}) {
+  Widget _row(
+    BuildContext context,
+    String label,
+    String value, {
+    bool isBold = false,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           label,
           style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+
             fontSize: 14,
             fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
           ),
@@ -67,6 +75,7 @@ class CartTotalSection extends StatelessWidget {
         Text(
           value,
           style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
             fontSize: 14,
             fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
           ),

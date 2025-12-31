@@ -1,6 +1,5 @@
 import 'package:appers_ecommerce_app/models/product.dart';
 import 'package:appers_ecommerce_app/screens/product_details_screen.dart';
-import 'package:appers_ecommerce_app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -15,20 +14,17 @@ class ProductCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) =>
-             ProductDetailsPage(product: product),
+            builder: (_) => ProductDetailsPage(product: product),
           ),
         );
-
-        
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withOpacity(0.05),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -42,7 +38,7 @@ class ProductCard extends StatelessWidget {
               flex: 7,
               child: Container(
                 decoration: BoxDecoration(
-                  color: AppColors.card,
+                  color: Theme.of(context).colorScheme.surface,
 
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(16),
@@ -73,7 +69,7 @@ class ProductCard extends StatelessWidget {
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
@@ -86,8 +82,9 @@ class ProductCard extends StatelessWidget {
                             const SizedBox(width: 4),
                             Text(
                               product.rating.toString(),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 12,
+                                color: Theme.of(context).colorScheme.primary,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -122,7 +119,9 @@ class ProductCard extends StatelessWidget {
                     product.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
                     ),
@@ -132,8 +131,10 @@ class ProductCard extends StatelessWidget {
                   // Price
                   Text(
                     '\$${product.price}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 15,
+                      color: Theme.of(context).colorScheme.primary,
+
                       fontWeight: FontWeight.bold,
                     ),
                   ),

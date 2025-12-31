@@ -22,16 +22,17 @@ class _MainScreenState extends State<MainScreen> {
       body: IndexedStack(index: _currentIndex, children: _pages),
 
       // navbar
-
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).navigationBarTheme.backgroundColor,
+
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
         },
-        selectedItemColor: AppColors.textPrimary,
-        unselectedItemColor: AppColors.textSecondary,
+        selectedItemColor: AppColors.navBarSelected(context),
+        unselectedItemColor: AppColors.navBarUnSelected(context),
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Shop'),
           BottomNavigationBarItem(

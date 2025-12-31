@@ -13,7 +13,7 @@ class ProductDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: AppColors.card,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Column(
           children: [
@@ -23,7 +23,7 @@ class ProductDetailsPage extends StatelessWidget {
                 Container(
                   height: height * 0.32,
                   width: double.infinity,
-                  color: const Color(0xFFF3F4F6),
+                  color: Theme.of(context).colorScheme.surface,
                   child: Center(
                     child: Hero(
                       tag: 'product_${product.id}',
@@ -46,9 +46,13 @@ class ProductDetailsPage extends StatelessWidget {
                   top: 8,
                   left: 8,
                   child: CircleAvatar(
-                    backgroundColor: Colors.white,
+                    backgroundColor: Theme.of(context).cardColor,
+
                     child: IconButton(
-                      icon: const Icon(Icons.arrow_back),
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                       onPressed: () => Navigator.pop(context),
                     ),
                   ),
@@ -62,7 +66,8 @@ class ProductDetailsPage extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
+
                   borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                   boxShadow: [
                     BoxShadow(
@@ -98,8 +103,10 @@ class ProductDetailsPage extends StatelessWidget {
                               const SizedBox(width: 4),
                               Text(
                                 product.rating.toString(),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 13,
+                                  color: Theme.of(context).colorScheme.primary,
+
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -113,8 +120,10 @@ class ProductDetailsPage extends StatelessWidget {
                       // Title
                       Text(
                         product.title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 20,
+                          color: Theme.of(context).colorScheme.primary,
+
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -124,8 +133,10 @@ class ProductDetailsPage extends StatelessWidget {
                       // Price
                       Text(
                         '\$${product.price}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 20,
+                          color: Theme.of(context).colorScheme.primary,
+
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -133,10 +144,12 @@ class ProductDetailsPage extends StatelessWidget {
                       const SizedBox(height: 20),
 
                       // Description
-                      const Text(
+                      Text(
                         'Description',
                         style: TextStyle(
                           fontSize: 16,
+                          color: Theme.of(context).colorScheme.primary,
+
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -146,7 +159,8 @@ class ProductDetailsPage extends StatelessWidget {
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.grey.shade700,
+                          color: AppColors.desColor(context),
+
                           height: 1.5,
                         ),
                       ),
@@ -163,7 +177,8 @@ class ProductDetailsPage extends StatelessWidget {
 
       // Add to cart button
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
+
         padding: const EdgeInsets.all(16),
         child: SizedBox(
           height: 52,
@@ -183,7 +198,8 @@ class ProductDetailsPage extends StatelessWidget {
               );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
+              backgroundColor: AppColors.buttonColor(context),
+
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(14),
               ),

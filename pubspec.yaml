@@ -26,6 +26,7 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/banners/
     - assets/fonts/
 
   # list giving the asset and other descriptors for the font. For

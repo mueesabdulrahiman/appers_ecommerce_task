@@ -1,6 +1,6 @@
 import 'package:appers_ecommerce_app/models/cart_Item.dart';
 import 'package:appers_ecommerce_app/providers/cart_provider.dart';
-import 'package:appers_ecommerce_app/widgets/quantity_button.dart';
+import 'package:appers_ecommerce_app/widgets/quantity_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,100 +12,118 @@ class CartItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = context.read<CartProvider>();
-    final isSmall = MediaQuery.of(context).size.width < 360;
 
     return Container(
-      padding: EdgeInsets.all(isSmall ? 12 : 16),
+      height: 120,
+      margin: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
+
         borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Image box
           Container(
-            height: 70,
-            width: 70,
-            padding: const EdgeInsets.all(8),
+            width: 100,
             decoration: BoxDecoration(
-              color: Colors.grey.shade100,
-              borderRadius: BorderRadius.circular(12),
+              color: Theme.of(context).colorScheme.surface,
+
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16),
+                bottomLeft: Radius.circular(16),
+              ),
             ),
-            child: Image.network(item.product.image, fit: BoxFit.contain),
+
+            //image
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Image.network(item.product.image, fit: BoxFit.contain),
+              ),
+            ),
           ),
-          const SizedBox(width: 12),
-
-          // Product info
+          SizedBox(width: 12),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Title + delete
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        item.product.title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          height: 1.2,
-                        ),
-                      ),
+            flex: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //title
+                  Text(
+                    item.product.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+
+                      fontWeight: FontWeight.w600,
+                      height: 1.2,
                     ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.delete_outline,
-                        color: Colors.redAccent,
-                        size: 20,
-                      ),
-                      onPressed: () => cart.removeFromCart(item.product.id),
+                  ),
+
+                  //category
+                  Text(
+                    item.product.category.toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey.shade600,
+                      height: 1.2,
                     ),
-                  ],
-                ),
+                  ),
 
+                  //price
+                  Text(
+                    '\$${item.product.price}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
 
-                Text(
-                  item.product.category.toUpperCase(),
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade600, height: 1.2),
-                ),
-
-                const SizedBox(height: 8),
-
-                // Price + quantity
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '\$${item.product.price}',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.bold,
                     ),
+                  ),
+                ],
+              ),
+            ),
+          ),
 
-                    // Quantity selector 
-                    Row(
-                      children: [
-                        QtyButton(
-                          icon: Icons.remove,
-                          onTap: () => cart.decreaseQuantity(item.product.id),
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          item.quantity.toString(),
-                          style: const TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                        const SizedBox(width: 10),
-                        QtyButton(
-                          icon: Icons.add,
-                          onTap: () => cart.increaseQuantity(item.product.id),
-                        ),
-                      ],
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.all(4),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+
+                    icon: const Icon(
+                      Icons.delete_outline,
+                      color: Colors.redAccent,
+                      size: 22,
                     ),
-                  ],
-                ),
-              ],
+                    onPressed: () => cart.removeFromCart(item.product.id),
+                  ),
+
+                  QuantitySelector(
+                    quantity: item.quantity,
+                    onIncrease: () => cart.increaseQuantity(item.product.id),
+                    onDecrease: () => cart.decreaseQuantity(item.product.id),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
