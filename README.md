@@ -43,6 +43,8 @@ The app focuses on UI quality, smooth UX, and clean architecture, while keeping 
 
 - Pixel-focused spacing and typography
 
+- Responsive layouts for different screen sizes
+
 #### Design Decisions
 
 - Followed a clean, modern e-commerce UI inspired by common production apps.
